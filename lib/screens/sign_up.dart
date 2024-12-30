@@ -4,7 +4,6 @@ import 'package:chat_app/screens/chat_page.dart';
 import 'package:chat_app/screens/cubits/register_cubit/register_cubit.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -12,7 +11,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class SignUp extends StatelessWidget {
   static String id = 'SignUpPage';
   String? email;
-
   String? password;
 
   bool isLoading = false;
@@ -24,14 +22,14 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
-         if (state is RegisterLoading) {
+        if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSuccess) {
           Navigator.pushNamed(context, ChatPage.id);
-          isLoading=false;
+          isLoading = false;
         } else if (state is RegisterFailure) {
           showSnackBar(context, state.errMessage);
-          isLoading=false;
+          isLoading = false;
         }
       },
       builder: (context, state) {
@@ -142,10 +140,5 @@ class SignUp extends StatelessWidget {
         );
       },
     );
-  }
-
-  Future<void> SigUpMethod() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 }

@@ -10,4 +10,3 @@ final class RegisterFailure extends RegisterState {
   String errMessage;
   RegisterFailure({required this.errMessage});
 }
-
