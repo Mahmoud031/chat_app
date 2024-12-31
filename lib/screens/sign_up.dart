@@ -1,7 +1,8 @@
 import 'package:chat_app/Helper/show_snack_bar.dart';
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/screens/chat_page.dart';
-import 'package:chat_app/screens/cubits/register_cubit/register_cubit.dart';
+import 'package:chat_app/screens/cubits/auth_cubit/auth_cubit.dart';
+
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
@@ -105,7 +106,7 @@ class SignUp extends StatelessWidget {
                       onTap: () async {
                         //make validate to the current state , take the data from the current state to check on it
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<RegisterCubit>(context)
+                          BlocProvider.of<AuthCubit>(context)
                               .SigUpMethod(email: email!, password: password!);
                         } else {}
                       },
